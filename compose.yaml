@@ -1,0 +1,16 @@
+# Docker Compose for BlackRock Retirement Savings API
+# Run: docker compose up -d
+# No external dependencies (DB, etc.); single service only.
+# If additional services are added later, define them here.
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: blk-hacking-ind-name-lastname
+    container_name: blackrock-challenge-app
+    ports:
+      - "5477:5477"
+    environment:
+      - SERVER_PORT=5477
