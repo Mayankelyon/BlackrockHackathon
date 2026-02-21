@@ -1,30 +1,38 @@
 package com.blackrock.retirement;
 
-/*
- * Test type: Integration / API tests (REST endpoints)
- * Validation: Request/response shapes, status codes, and business logic (parse ceiling/remanent, filter q/p/k, returns NPS/index)
- * Command: mvn test -Dtest=BlackrockChallengeApiTest
- */
+import static org.hamcrest.Matchers.hasSize;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.blackrock.retirement.dto.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.List;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import java.util.List;
+/*
+ * Test type: Integration / API tests (REST endpoints)
+ * Validation: Request/response shapes, status codes, and business logic (parse ceiling/remanent, filter q/p/k, returns NPS/index)
+ * Command: mvn test -Dtest=BlackrockChallengeApiTest
+ */
+import com.blackrock.retirement.dto.ExpenseInput;
+import com.blackrock.retirement.dto.FilterRequestDto;
+import com.blackrock.retirement.dto.KPeriodDto;
+import com.blackrock.retirement.dto.PPeriodDto;
+import com.blackrock.retirement.dto.QPeriodDto;
+import com.blackrock.retirement.dto.ReturnsRequestDto;
+import com.blackrock.retirement.dto.TransactionDto;
+import com.blackrock.retirement.dto.ValidatorRequestDto;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.hamcrest.Matchers.*;
+import tools.jackson.databind.ObjectMapper;
 
 @SpringBootTest
-@AutoConfigureMockMvc
 class BlackrockChallengeApiTest {
 
     @Autowired

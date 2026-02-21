@@ -10,7 +10,7 @@ EXPOSE 5477
 WORKDIR /app
 
 # Copy built artifact (build with: mvn -DskipTests clean package)
-COPY target/retirement-savings-api-0.0.1-SNAPSHOT.jar app.jar
+COPY target/*.jar app.jar
 
 # Run on port 5477
 ENV SERVER_PORT=5477
